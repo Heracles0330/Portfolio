@@ -32,4 +32,4 @@ jobs:
                   VERCEL_TOKEN: aPOw3pb8vUyhbvJQk3mNezkF
               run: |
                   npm install -g vercel
-                  vercel --prod --token $VERCEL_TOKEN --yes
+                  vercel --prod --token $VERCEL_TOKEN --name Heracles-Portfolio --yes
