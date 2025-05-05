@@ -4,14 +4,19 @@ import nodemailer from 'nodemailer';
 
 // Create and configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  host: 'smtp.gmail.com',
+  host: '142.251.167.109',
   port: 587,
-  secure: false, 
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.EMAIL_ADDRESS,
-    pass: process.env.GMAIL_PASSKEY, 
+    pass: process.env.GMAIL_PASSKEY,
   },
+  tls: {
+    ciphers: 'SSLv3',
+    rejectUnauthorized: true
+  },
+  debug: true // This will help you see detailed connection logs
 });
 
 // Helper function to send a message via Telegram
@@ -82,24 +87,22 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    const message = `New message from ${name}\n\nEmail: ${email}\n\nMessage:\n\n${userMessage}\n\n`;
+    const message = `From ${name}\nEmail: ${email}\n\n${userMessage}`;
 
     // Send Telegram message
     const telegramSuccess = await sendTelegramMessage(token, chat_id, message);
 
-    // Send email
-    const emailSuccess = await sendEmail(payload, message);
 
-    if (telegramSuccess && emailSuccess) {
+    if (telegramSuccess) {
       return NextResponse.json({
         success: true,
-        message: 'Message and email sent successfully!',
+        message: 'Message sent to Telegram successfully!',
       }, { status: 200 });
     }
 
     return NextResponse.json({
       success: false,
-      message: 'Failed to send message or email.',
+      message: 'Failed to send message.',
     }, { status: 500 });
   } catch (error:any) {
     console.error('API Error:', error.message);

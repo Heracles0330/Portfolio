@@ -41,7 +41,7 @@ function ContactForm() {
         userInput
       );
 
-      toast.success("Message sent successfully!");
+      toast.success("Message sent to Telegram successfully!");
       setUserInput({
         name: "",
         email: "",
