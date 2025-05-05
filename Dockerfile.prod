@@ -1,5 +1,7 @@
 FROM node:20 AS base
 WORKDIR /app
+ARG TELEGRAM_BOT_TOKEN
+ARG TELEGRAM_CHAT_ID
 RUN npm i -g next
 
 COPY package*.json ./
@@ -15,6 +17,8 @@ COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/package.json ./package.json
 COPY --from=base /app/.next ./.next
 
+ENV TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+ENV TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
 EXPOSE 3000
 
 CMD ["npm", "start"]
