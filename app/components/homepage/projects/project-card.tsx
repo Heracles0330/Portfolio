@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-function ProjectCard({ project }) {
+function ProjectCard({ project }: { project: any }) {
 
   return (
     <div className="from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37] w-full">
@@ -39,7 +39,7 @@ function ProjectCard({ project }) {
             <span className=" text-white">tools:</span>
             <span className="text-gray-400">{` ['`}</span>
             {
-              project.tools.map((tag, i) => (
+              project.tools.map((tag: any, i: number) => (
                 <React.Fragment key={i}>
                   <span className="text-amber-300">{tag}</span>
                   {

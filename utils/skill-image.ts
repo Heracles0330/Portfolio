@@ -84,7 +84,7 @@ import fastapi from '../app/assets/svg/skills/fastapi.svg'
 
 
 
-export const skillsImage = (skill) => {
+export const skillsImage = (skill: string) => {
   const skillID = skill.toLowerCase();
   switch (skillID) {
     case 'gcp':

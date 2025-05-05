@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
+import { Button } from "@/components/ui/button"
 
 function ContactForm() {
   const [error, setError] = useState({ email: false, required: false });
@@ -21,7 +22,7 @@ function ContactForm() {
     }
   };
 
-  const handleSendMail = async (e) => {
+  const handleSendMail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!userInput.email || !userInput.message || !userInput.name) {
@@ -46,7 +47,7 @@ function ContactForm() {
         email: "",
         message: "",
       });
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error?.response?.data?.message);
     } finally {
       setIsLoading(false);
@@ -64,7 +65,7 @@ function ContactForm() {
             <input
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               type="text"
-              maxLength="100"
+              maxLength={100}
               required={true}
               onChange={(e) => setUserInput({ ...userInput, name: e.target.value })}
               onBlur={checkRequired}
@@ -72,12 +73,12 @@ function ContactForm() {
             />
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2"> 
             <label className="text-base">Your Email: </label>
             <input
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
               type="email"
-              maxLength="100"
+              maxLength={100}
               required={true}
               value={userInput.email}
               onChange={(e) => setUserInput({ ...userInput, email: e.target.value })}
@@ -93,12 +94,12 @@ function ContactForm() {
             <label className="text-base">Your Message: </label>
             <textarea
               className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-              maxLength="500"
+              maxLength={500}
               name="message"
               required={true}
               onChange={(e) => setUserInput({ ...userInput, message: e.target.value })}
               onBlur={checkRequired}
-              rows="4"
+              rows={4}
               value={userInput.message}
             />
           </div>
@@ -106,10 +107,10 @@ function ContactForm() {
             {error.required && <p className="text-sm text-red-400">
               All fiels are required!
             </p>}
-            <button
+            <Button
               className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-5 md:px-12 py-2.5 md:py-3 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
               role="button"
-              onClick={handleSendMail}
+              onClick={(e) => handleSendMail(e as unknown as React.FormEvent<HTMLFormElement>)}
               disabled={isLoading}
             >
               {
@@ -120,7 +121,7 @@ function ContactForm() {
                   <TbMailForward size={20} />
                 </span>
               }
-            </button>
+            </Button>
           </div>
         </div>
       </div>

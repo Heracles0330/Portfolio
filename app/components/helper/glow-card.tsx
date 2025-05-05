@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-const GlowCard = ({ children , identifier}) => {
+const GlowCard = ({ children , identifier}: { children: React.ReactNode, identifier: string }) => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const CONTAINER = window.document.querySelector(`.glow-container-${identifier}`);
@@ -17,7 +17,7 @@ const GlowCard = ({ children , identifier}) => {
         opacity: 0,
       };
 
-      const UPDATE = (event) => {
+      const UPDATE = (event: any) => {
         for (const CARD of CARDS) {
           const CARD_BOUNDS = CARD.getBoundingClientRect();
 
@@ -27,9 +27,9 @@ const GlowCard = ({ children , identifier}) => {
             event?.y > CARD_BOUNDS.top - CONFIG.proximity &&
             event?.y < CARD_BOUNDS.top + CARD_BOUNDS.height + CONFIG.proximity
           ) {
-            CARD.style.setProperty('--active', 1);
+            (CARD as HTMLElement).style.setProperty('--active', '1');
           } else {
-            CARD.style.setProperty('--active', CONFIG.opacity);
+            (CARD as HTMLElement).style.setProperty('--active', CONFIG.opacity.toString());
           }
 
           const CARD_CENTER = [
@@ -44,24 +44,24 @@ const GlowCard = ({ children , identifier}) => {
 
           ANGLE = ANGLE < 0 ? ANGLE + 360 : ANGLE;
 
-          CARD.style.setProperty('--start', ANGLE + 90);
+          (CARD as HTMLElement).style.setProperty('--start', (ANGLE + 90).toString());
         }
       };
 
       window.document.body.addEventListener('pointermove', UPDATE);
 
       const RESTYLE = () => {
-        CONTAINER.style.setProperty('--gap', CONFIG.gap);
-        CONTAINER.style.setProperty('--blur', CONFIG.blur);
-        CONTAINER.style.setProperty('--spread', CONFIG.spread);
-        CONTAINER.style.setProperty(
+        (CONTAINER as HTMLElement).style.setProperty('--gap', CONFIG.gap.toString());
+        (CONTAINER as HTMLElement).style.setProperty('--blur', CONFIG.blur.toString());
+        (CONTAINER as HTMLElement).style.setProperty('--spread', CONFIG.spread.toString());
+        (CONTAINER as HTMLElement).style.setProperty(
           '--direction',
           CONFIG.vertical ? 'column' : 'row'
         );
       };
 
       RESTYLE();
-      UPDATE();
+      UPDATE({ x: 0, y: 0 });
 
       // Cleanup event listener
       return () => {

@@ -36,7 +36,7 @@ function Skills() {
           play={true}
           direction="left"
         >
-          {skillsData.map((skill, id) => (
+          {skillsData.map((skill: any, id: number ) => (
             <div className="w-36 min-w-fit h-fit flex flex-col items-center justify-center transition-all duration-500 m-3 sm:m-5 rounded-lg group relative hover:scale-[1.15] cursor-pointer"
               key={id}>
               <div className="h-full w-full rounded-lg border border-[#1f223c] bg-[#11152c] shadow-none shadow-gray-50 group-hover:border-violet-500 transition-all duration-500">
