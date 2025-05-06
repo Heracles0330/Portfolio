@@ -62,7 +62,7 @@ jobs:
                   npm install -g vercel
                   vercel --prod --token $VERCEL_TOKEN --yes
 
-    docker-push:
+    docker-push-dockerHub:
         runs-on: ubuntu-latest
         needs: test
         steps:
@@ -90,7 +90,7 @@ jobs:
 
     railway-deploy:
         runs-on: ubuntu-latest
-        needs: docker-push
+        needs: docker-push-dockerHub
         steps:
             - uses: actions/checkout@v3
 
@@ -101,6 +101,6 @@ jobs:
               env:
                 RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
               run: |
-                railway link ${{ secrets.RAILWAY_PROJECT_ID }}
+                railway link -- project ${{ secrets.RAILWAY_PROJECT_ID }}
                 railway service update ${{ secrets.RAILWAY_SERVICE_NAME }} --dockerfile Dockerfile.prod
                 railway up --service ${{ secrets.RAILWAY_SERVICE_NAME }}
