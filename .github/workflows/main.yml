@@ -101,4 +101,4 @@ jobs:
               env:
                 RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
               run: |
-                railway up --dockerfile Dockerfile.prod
+                railway up
