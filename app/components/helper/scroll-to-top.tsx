@@ -143,7 +143,7 @@ const ScrollToTop = () => {
                             <div className="flex-1 overflow-y-auto space-y-2 p-2 bg-gray-100 rounded">
                                 {messages.length === 0 && (
                                     <div className="text-center text-gray-700 font-medium py-8">
-                                        Ask about Heracles's information!
+                                        Ask about Heracles&apos;s information!
                                     </div>
                                 )}
                                 {messages.map((msg, i) => (
