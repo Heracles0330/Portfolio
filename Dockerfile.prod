@@ -10,12 +10,15 @@ RUN npm install
 COPY . .
 RUN npm run build
 
+COPY public ./public
+
 FROM node:20-alpine3.19 as release
 WORKDIR /app
 
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/package.json ./package.json
 COPY --from=base /app/.next ./.next
+COPY --from=base /app/public ./public
 
 ENV TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
 ENV TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}

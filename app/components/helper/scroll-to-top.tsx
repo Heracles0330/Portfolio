@@ -15,12 +15,12 @@ import { FaArrowDown } from "react-icons/fa6";
 import { BsChatDotsFill, BsXLg } from "react-icons/bs";
 
 const DEFAULT_BTN_CLS =
-    "fixed bottom-8 right-6 z-50 flex items-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 hover:text-xl transition-all duration-300 ease-out";
+  "fixed bottom-8 right-6 z-50 flex items-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 hover:text-xl transition-all duration-300 ease-out";
 const SCROLL_THRESHOLD = 50;
 
 const ScrollToTop = () => {
-    const [btnCls, setBtnCls] = useState(DEFAULT_BTN_CLS);
-    const [isUp, setIsUp] = useState(true);
+  const [btnCls, setBtnCls] = useState(DEFAULT_BTN_CLS);
+  const [isUp, setIsUp] = useState(true);
     const [showCard, setShowCard] = useState(false);
     const [messages, setMessages] = useState<
         { from: "user" | "bot"; text: string; isStreaming?: boolean }[]
@@ -28,7 +28,7 @@ const ScrollToTop = () => {
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
         document
             .getElementById("chat-end")
             ?.scrollIntoView({ behavior: "smooth" });
@@ -118,14 +118,14 @@ const ScrollToTop = () => {
     };
     useEffect(() => {
         // Any existing effect logic can remain here
-    }, []);
+  }, []);
 
     const toggleCard = () => {
         setShowCard(!showCard);
         setIsUp(!isUp);
     };
 
-    return (
+  return (
         <>
             <Card className="fixed bottom-8 right-6 z-50 p-0 -translate-y-[52px]">
                 {showCard && (
@@ -210,9 +210,9 @@ const ScrollToTop = () => {
             </Card>
             <button className={DEFAULT_BTN_CLS} onClick={toggleCard}>
                 {isUp ? <BsChatDotsFill /> : <BsXLg />}
-            </button>
+    </button>
         </>
-    );
+  );
 };
 
 export default ScrollToTop;
