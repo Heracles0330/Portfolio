@@ -13,6 +13,6 @@ export const personalData = {
   stackOverflow: '',
   leetcode: "",
   devUsername: "Heracles0330",
-  resume: "",
+  resume: "/Heracles_Resume.pdf",
   avatar: '/avatar.png'
 }
