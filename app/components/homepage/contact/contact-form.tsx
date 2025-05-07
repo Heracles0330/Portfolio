@@ -6,6 +6,7 @@ import { useState } from "react";
 import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button"
+import { FaTelegram } from "react-icons/fa";
 
 function ContactForm() {
   const [error, setError] = useState({ email: false, required: false });
@@ -117,8 +118,8 @@ function ContactForm() {
                 isLoading ?
                 <span>Sending Message...</span>:
                 <span className="flex items-center gap-1">
-                  Send Message
-                  <TbMailForward size={20} />
+                  Send Message to Telegram
+                  <FaTelegram size={20} />
                 </span>
               }
             </Button>
